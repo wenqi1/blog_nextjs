@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Content() {
   const [banner, setBanner] = useState("banner1.jpg");
@@ -106,9 +106,9 @@ export default function Content() {
     },
   ];
 
-  setInterval(() => {
+  useEffect(() => {
     setBanner("banner" + Math.floor(Math.random() * 3 + 1) + ".jpg");
-  }, 200000);
+  });
 
   return (
     <main className="content_main">
@@ -119,21 +119,29 @@ export default function Content() {
         ></div>
 
         <div className="content_left_navigation">
-          {classify.map((item, num) => (
-            <div
-              key={num}
-              onClick={() => {
-                handlerClick(num);
-              }}
-              className={
-                num === index
-                  ? "content_left_navigation_item_check"
-                  : "content_left_navigation_item"
-              }
-            >
-              {item.name}
-            </div>
-          ))}
+          <div className="content_left_navigation_items">
+            {classify.map((item, num) => (
+              <div
+                key={num}
+                onClick={() => {
+                  handlerClick(num);
+                }}
+                className={
+                  num === index
+                    ? "content_left_navigation_item_check"
+                    : "content_left_navigation_item"
+                }
+              >
+                {item.name}
+              </div>
+            ))}
+          </div>
+          <div>
+            <img
+              src="/images/more.png"
+              className="content_left_navigation_more"
+            />
+          </div>
         </div>
 
         <div className="content_left_items">
@@ -150,8 +158,8 @@ export default function Content() {
       <div className="content_right">
         <div className="content_right_person">
           <img src="/images/header.jpg" className="content_right_header" />
-          <p className="content_right_name">文奇Leo</p>
-          <p className="content_right_description">一个独立开发者</p>
+          <p className="content_right_name">文奇</p>
+          <p className="content_right_description">一个程序开发者</p>
           <div className="content_right_contact">
             <div>
               <img

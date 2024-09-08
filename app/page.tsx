@@ -13,15 +13,15 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.title1_div}>你好，我是</div>
-      <div className={styles.title2_div}>文奇Leo</div>
+      <div className={styles.title2_div}>文奇</div>
       <div className={styles.title3_div}>
-        一个独立开发者，热爱生活，喜欢分享
+        一个程序开发者，热爱生活，乐于分享
       </div>
       <div className={styles.title4_div}>
         喜欢Java、JavaScript、Python、HarmonyOS等技术
       </div>
       <div className={styles.entry_div} onClick={handlerClick}>
-        welcome to my blog
+        欢迎进入我的博客
       </div>
     </main>
   );
