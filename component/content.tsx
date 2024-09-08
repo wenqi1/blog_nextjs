@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Content() {
@@ -7,8 +8,14 @@ export default function Content() {
 
   const [index, setIndex] = useState(0);
 
+  const router = useRouter();
+
   function handlerClick(index: number) {
     setIndex(index);
+  }
+
+  function handlerClickDetails() {
+    router.push("/details");
   }
 
   const classify = [
@@ -16,13 +23,16 @@ export default function Content() {
       name: "Java",
     },
     {
-      name: "python",
+      name: "Python",
     },
     {
       name: "JavaScript",
     },
     {
       name: "HarmonyOS",
+    },
+    {
+      name: "Other",
     },
   ];
 
@@ -77,32 +87,32 @@ export default function Content() {
     {
       title: "Java数据类型介绍",
       date: "2024/4/10",
-      cover: "/images/item1.jpg",
+      cover: "/images/java.png",
     },
     {
       title: "Java多线程的使用",
       date: "2024/4/10",
-      cover: "/images/item2.jpg",
+      cover: "/images/python.png",
     },
     {
       title: "Java集合的介绍",
       date: "2024/4/10",
-      cover: "/images/item3.jpg",
+      cover: "/images/harmonyos.png",
     },
     {
       title: "Java垃圾回收器",
       date: "2024/4/10",
-      cover: "/images/item4.jpg",
+      cover: "/images/javascript.png",
     },
     {
       title: "Java如何保证线程安全",
       date: "2024/4/10",
-      cover: "/images/item5.jpg",
+      cover: "/images/other1.png",
     },
     {
       title: "Java虚拟机性能调优",
       date: "2024/4/10",
-      cover: "/images/item6.jpg",
+      cover: "/images/other2.png",
     },
   ];
 
@@ -148,7 +158,12 @@ export default function Content() {
           {items.map((item, index) => (
             <div key={index} className="content_left_item">
               <img src={item.cover} className="content_left_item_cover" />
-              <p>{item.title}</p>
+              <p
+                className="content_left_item_title"
+                onClick={handlerClickDetails}
+              >
+                {item.title}
+              </p>
               <p className="content_left_item_date">{item.date}</p>
             </div>
           ))}

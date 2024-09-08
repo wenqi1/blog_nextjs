@@ -41,6 +41,7 @@ body {
 
 .header_lable:hover {
   background-color: #c02c38;
+  border-radius: 6px;
   color: #ffffff;
   cursor: pointer;
 }
@@ -112,6 +113,11 @@ body {
 .content_left_item_cover {
   width: 22vw;
   height: 200px;
+}
+
+.content_left_item_title {
+  cursor: pointer;
+  font-weight: bolder;
 }
 
 .content_left_item_date {
