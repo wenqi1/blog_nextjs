@@ -1,0 +1,7 @@
+[
+    {"name": "个人博客", "path": "/blog"},
+    {"name": "生活日记", "path": "/life"},
+    {"name": "美好瞬间", "path": "/wonderful"},
+    {"name": "兴趣分享", "path": "/share"},
+    {"name": "个人简历", "path": "/personal"}
+]

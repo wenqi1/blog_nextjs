@@ -1,25 +1,38 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import navigation from "../public/resource/navigation.json";
 
 export default function Header() {
   const router = useRouter();
 
-  function handlerClick() {
-    router.push("/home");
+  function handlerClick(path: string) {
+    router.push(path);
   }
 
   return (
     <main className="header_main">
-      <div className="header_logo" onClick={handlerClick}>
+      <div
+        className="header_logo"
+        onClick={() => {
+          handlerClick("/home");
+        }}
+      >
         文奇的博客
       </div>
 
       <div className="header_navigation">
-        <div className="header_lable">技术博客</div>
-        <div className="header_lable">生活随笔</div>
-        <div className="header_lable">旅游记录</div>
-        <div className="header_lable">个人简历</div>
+        {navigation.map((item, index) => (
+          <div
+            key={index}
+            className="header_lable"
+            onClick={() => {
+              handlerClick(item.path);
+            }}
+          >
+            {item.name}
+          </div>
+        ))}
       </div>
     </main>
   );
