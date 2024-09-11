@@ -1,0 +1,77 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f8fc;
+}
+.personal {
+    display: flex;
+    flex-direction: column;
+    height: 89vh;
+}
+.personal_img_div {
+    text-align: center;
+    width: 100%;
+}
+.personal_img {
+    width: 300px;
+    height: 300px;
+}
+.personal_profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    padding: 0 15vw;
+    margin-bottom: 1vh;
+}
+.personal_profile_title {
+    height: 100%;
+    width: 15%;
+    text-align: center;
+    line-height: 10vh;
+    font-size: 20px;
+    font-weight: bolder;
+    color: white;
+    border-radius: 6px 0 0 6px;
+}
+.personal_profile_content {
+    height: 100%;
+    width: 85%;
+    text-align: center;
+    line-height: 10vh;
+    border-radius: 0 6px 6px 0;
+}
+.personal_introduce_title_color {
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+}
+.personal_introduce_content_color {
+    color: blueviolet;
+    border: 1px solid blueviolet;
+}
+.personal_interest_title_color {
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
+}
+.personal_interest_content_color {
+    color: dodgerblue;
+    border: 1px solid dodgerblue;
+}
+.personal_share_title_color {
+    background-color: darkorange;
+    border: 1px solid darkorange;
+}
+.personal_share_content_color {
+    color: darkorange;
+    border: 1px solid darkorange;
+}
+.personal_vision_title_color {
+    background-color: firebrick;
+    border: 1px solid firebrick;
+}
+.personal_vision_content_color {
+    color: firebrick;
+    border: 1px solid firebrick;
+}

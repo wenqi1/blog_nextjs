@@ -18,10 +18,10 @@ body {
   margin-bottom: 1vh;
   position: sticky;
   top: 0px;
-}
+} 
 
 .header_logo {
-  width: 20vw;
+  width: 30vw;
   color: #c02c38;
   font-size: 20px;
   font-weight: bolder;
@@ -35,14 +35,12 @@ body {
 
 .header_lable {
   height: 5vh;
-  padding: 0 15px;
+  margin: 0 15px;
   line-height: 5vh;
 }
 
 .header_lable:hover {
-  background-color: #c02c38;
-  border-radius: 6px;
-  color: #ffffff;
+  border-bottom: 2px solid #c02c38;
   cursor: pointer;
 }
 
