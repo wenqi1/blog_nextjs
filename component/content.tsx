@@ -1,124 +1,89 @@
 "use client";
 
+import { apiClient } from "@/app/utils/apiClient";
+import { stringUtil } from "@/app/utils/stringUtil";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Content() {
   const [banner, setBanner] = useState("banner1.jpg");
-
+  // 分类导航栏索引
   const [index, setIndex] = useState(0);
-
+  // 所有分类
+  const [categories, setCategories] = useState([]);
+  // 每个分类的top6文章
+  const [articles, setArticles] = useState([
+    { id: "", title: "", pushTime: "" },
+  ]);
+  // 所有标签
+  const [tags, setTags] = useState([{ name: "" }]);
+  // 每个分类下文章数
+  const [articleCount, setArticleCount] = useState([
+    { categoryName: "", count: "" },
+  ]);
+  // 所有文章数
+  const [count, setCount] = useState(0);
   const router = useRouter();
+  const colors = ["#3366FF", "#67DD30", "#3AC8FC", "#FCE21B", "#FF6519"];
 
   function handlerClick(index: number) {
     setIndex(index);
   }
 
-  function handlerClickDetails() {
-    router.push("/details");
+  function handlerClickDetails(id: string) {
+    router.push(`/details?id=${id}`);
   }
-
-  const classify = [
-    {
-      name: "Java",
-    },
-    {
-      name: "Python",
-    },
-    {
-      name: "JavaScript",
-    },
-    {
-      name: "HarmonyOS",
-    },
-    {
-      name: "Other",
-    },
-  ];
-
-  const tags = [
-    {
-      name: "组件库",
-      color: "#3366FF",
-    },
-    {
-      name: "web",
-      color: "#67DD30",
-    },
-    {
-      name: "MySql",
-      color: "#3AC8FC",
-    },
-    {
-      name: "Redis",
-      color: "#FCE21B",
-    },
-    {
-      name: "Spring",
-      color: "#FF6519",
-    },
-    {
-      name: "MySql",
-      color: "#3AC8FC",
-    },
-    {
-      name: "Redis",
-      color: "#FCE21B",
-    },
-    {
-      name: "Spring",
-      color: "#FF6519",
-    },
-    {
-      name: "MySql",
-      color: "#3AC8FC",
-    },
-    {
-      name: "Redis",
-      color: "#FCE21B",
-    },
-    {
-      name: "Spring",
-      color: "#FF6519",
-    },
-  ];
-
-  const items = [
-    {
-      title: "Java数据类型介绍",
-      date: "2024/4/10",
-      cover: "/images/java.png",
-    },
-    {
-      title: "Java多线程的使用",
-      date: "2024/4/10",
-      cover: "/images/python.png",
-    },
-    {
-      title: "Java集合的介绍",
-      date: "2024/4/10",
-      cover: "/images/harmonyos.png",
-    },
-    {
-      title: "Java垃圾回收器",
-      date: "2024/4/10",
-      cover: "/images/javascript.png",
-    },
-    {
-      title: "Java如何保证线程安全",
-      date: "2024/4/10",
-      cover: "/images/other1.png",
-    },
-    {
-      title: "Java虚拟机性能调优",
-      date: "2024/4/10",
-      cover: "/images/other2.png",
-    },
-  ];
 
   useEffect(() => {
     setBanner("banner" + Math.floor(Math.random() * 3 + 1) + ".jpg");
-  });
+
+    apiClient
+      .get("/category/query")
+      .then((response) => {
+        setCategories(response.data.data);
+      })
+      .catch((error) => {
+        console.error("failed fetch data:", error);
+      });
+
+    apiClient
+      .get("/tag/queryAll")
+      .then((response) => {
+        setTags(response.data.data);
+      })
+      .catch((error) => {
+        console.error("failed fetch data:", error);
+      });
+
+    apiClient
+      .get("/article/queryArticleCountInCategory")
+      .then((response) => {
+        setArticleCount(response.data.data);
+      })
+      .catch((error) => {
+        console.error("failed fetch data:", error);
+      });
+
+    apiClient
+      .get("/article/queryArticleCount")
+      .then((response) => {
+        setCount(response.data.data);
+      })
+      .catch((error) => {
+        console.error("failed fetch data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    apiClient
+      .get(`/article/queryTop?category=${categories[index]}&n=6`)
+      .then((response) => {
+        setArticles(response.data.data);
+      })
+      .catch((error) => {
+        console.error("failed fetch data:", error);
+      });
+  }, [categories, index]);
 
   return (
     <main className="content_main">
@@ -130,7 +95,7 @@ export default function Content() {
 
         <div className="content_left_navigation">
           <div className="content_left_navigation_items">
-            {classify.map((item, num) => (
+            {categories.map((item, num) => (
               <div
                 key={num}
                 onClick={() => {
@@ -142,7 +107,7 @@ export default function Content() {
                     : "content_left_navigation_item"
                 }
               >
-                {item.name}
+                {item}
               </div>
             ))}
           </div>
@@ -155,16 +120,23 @@ export default function Content() {
         </div>
 
         <div className="content_left_items">
-          {items.map((item, index) => (
+          {articles.map((item, index) => (
             <div key={index} className="content_left_item">
-              <img src={item.cover} className="content_left_item_cover" />
+              <img
+                src="/images/python.png"
+                className="content_left_item_cover"
+              />
               <p
                 className="content_left_item_title"
-                onClick={handlerClickDetails}
+                onClick={() => {
+                  handlerClickDetails(item.id);
+                }}
               >
                 {item.title}
               </p>
-              <p className="content_left_item_date">{item.date}</p>
+              <p className="content_left_item_date">
+                {stringUtil.formatDate(item.pushTime, "YYYY-MM-DD hh:mm:ss")}
+              </p>
             </div>
           ))}
         </div>
@@ -214,15 +186,15 @@ export default function Content() {
           </div>
           <div className="content_right_data">
             <div>
-              <p>10000</p>
+              <p>{count}</p>
               <p>文章</p>
             </div>
             <div>
-              <p>10000</p>
+              <p>{categories.length}</p>
               <p>分类</p>
             </div>
             <div>
-              <p>10000</p>
+              <p>{tags.length}</p>
               <p>标签</p>
             </div>
           </div>
@@ -236,22 +208,12 @@ export default function Content() {
             />
             <span className="content_right_classify_text">分类</span>
           </div>
-          <div className="content_right_classify_item">
-            <span>Java</span>
-            <span>10</span>
-          </div>
-          <div className="content_right_classify_item">
-            <span>Python</span>
-            <span>10</span>
-          </div>
-          <div className="content_right_classify_item">
-            <span>JavaScript</span>
-            <span>10</span>
-          </div>
-          <div className="content_right_classify_item">
-            <span>HarmonyOS</span>
-            <span>10</span>
-          </div>
+          {articleCount.map((item, index) => (
+            <div key={index} className="content_right_classify_item">
+              <span>{item.categoryName}</span>
+              <span>{item.count}</span>
+            </div>
+          ))}
         </div>
 
         <div className="content_right_tag">
@@ -263,7 +225,7 @@ export default function Content() {
             {tags.map((tag, index) => (
               <div
                 key={index}
-                style={{ color: tag.color }}
+                style={{ color: colors[Math.floor(Math.random() * 5 + 1)] }}
                 className="content_right_tag_style"
               >
                 {tag.name}
