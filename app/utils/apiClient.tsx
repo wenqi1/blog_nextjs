@@ -16,7 +16,9 @@ class ApiClient {
     return this.apiClient.post(endpoint, data);
   }
 
-  // 其他HTTP方法（put, patch, delete）...
+  postForm(endpoint: string, data: FormData) {
+    return this.apiClient.post(endpoint, data);
+  }
 }
 
 export const apiClient = new ApiClient("http://localhost:8089");

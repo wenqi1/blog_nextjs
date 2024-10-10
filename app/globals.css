@@ -39,6 +39,14 @@ body {
   line-height: 5vh;
 }
 
+.header_lable_check {
+  height: 5vh;
+  margin: 0 15px;
+  line-height: 5vh;
+  color: #c02c38;
+  border-bottom: 2px solid #c02c38;
+}
+
 .header_lable:hover {
   border-bottom: 2px solid #c02c38;
   cursor: pointer;

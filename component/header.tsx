@@ -1,33 +1,30 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import navigation from "../public/resource/navigation.json";
+import { useState } from "react";
 
 export default function Header() {
   const router = useRouter();
 
-  function handlerClick(path: string) {
-    router.push(path);
+  const [index, setIndex] = useState(parseInt(useSearchParams().get("index")!));
+
+  function handlerClick(path: string, index: number) {
+    setIndex(index);
+    router.push(`${path}?index=${index}`);
   }
 
   return (
     <main className="header_main">
-      <div
-        className="header_logo"
-        onClick={() => {
-          handlerClick("/home");
-        }}
-      >
-        文奇的博客
-      </div>
+      <div className="header_logo">文奇的博客</div>
 
       <div className="header_navigation">
-        {navigation.map((item, index) => (
+        {navigation.map((item, num) => (
           <div
-            key={index}
-            className="header_lable"
+            key={num}
+            className={num === index ? "header_lable_check" : "header_lable"}
             onClick={() => {
-              handlerClick(item.path);
+              handlerClick(item.path, num);
             }}
           >
             {item.name}

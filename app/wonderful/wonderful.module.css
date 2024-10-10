@@ -1,0 +1,29 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f8fc;
+}
+.wonderful {
+    display: flex;
+    justify-content: center;
+    
+}
+.wonderful_content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60vw;
+    background-color: #ffffff;
+    border-radius: 6px;
+}
+.wonderful_content_item {
+    width: 19vw;
+    margin: 15px 0.5vw;
+}
+.wonderful_content_item_title {
+    font-weight: bolder;
+}
+.wonderful_content_item_date {
+    font-size: 12px;
+    color: #8a8a8a;
+}

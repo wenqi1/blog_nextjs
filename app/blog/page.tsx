@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import { stringUtil } from "../utils/stringUtil";
 import { useRouter } from "next/navigation";
+import { Divider } from "antd";
 
 export default function blog() {
   // 所有分类
@@ -111,7 +112,7 @@ export default function blog() {
                   点赞量 {item.likeCount}
                 </span>
               </div>
-              <div className={styles.blog_item_line}></div>
+              <Divider />
             </div>
           ))}
         </div>

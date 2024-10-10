@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   function handlerClick() {
-    router.push("/home");
+    router.push("/home?index=0");
   }
 
   return (

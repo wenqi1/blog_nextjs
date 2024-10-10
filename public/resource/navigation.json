@@ -1,4 +1,5 @@
 [
+    {"name": "首页", "path": "/home"},
     {"name": "个人博客", "path": "/blog"},
     {"name": "生活日记", "path": "/life"},
     {"name": "美好瞬间", "path": "/wonderful"},
